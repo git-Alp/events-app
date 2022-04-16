@@ -21,7 +21,12 @@ let handleGetEvent = () => {
     event.value = response.data
   })
   .catch(error => {
-    router.push({ name: 'NotFound' })
+    router.push({ 
+      name: 'NotFoundEvent',
+      params: {
+        resource: 'event'
+      }
+    })
     console.log(error);
   })
 }
@@ -31,7 +36,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style>
-
-</style>

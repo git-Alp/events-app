@@ -28,6 +28,12 @@ const routes = [
     name: 'NotFound',
     component: NotFound,
   },
+  {
+    path: '/:resource/:id',
+    name: 'NotFoundEvent',
+    props: true,
+    component: NotFound
+  },
 ]
 
 const router = createRouter({
