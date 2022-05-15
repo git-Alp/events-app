@@ -7,32 +7,17 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import router from '../router';
-import EventService from '../services/EventService';
+import { onMounted, computed } from 'vue';
+import store from '../store';
 
 const props = defineProps(['id']);
 
-let event = ref(null)
+let event = computed(() => store.state.event);
 
-let handleGetEvent = () => {
-  EventService.getEvent(props.id)
-  .then(response => {
-    event.value = response.data
-  })
-  .catch(error => {
-    router.push({ 
-      name: 'NotFoundEvent',
-      params: {
-        resource: 'event'
-      }
-    })
-    console.log(error);
-  })
+let handleFetchEvent = () => {
+  store.dispatch('fetchEvent', props.id)
 }
 
-onMounted(() => {
-  handleGetEvent()
-})
+onMounted(() => {handleFetchEvent()})
 
 </script>

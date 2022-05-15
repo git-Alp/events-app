@@ -6,24 +6,29 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, computed } from 'vue'
+import router from '../router';
+import store from '../store';
 import EventCard from '../components/EventCard.vue'
-import EventService from '../services/EventService'
 
-let events = ref(null)
-
-let handleGetEvents = () => {
-  EventService.getEvents()
-  .then(response => {
-    events.value = response.data
-  })
-  .catch(error => {
-    console.log(error);
-  })
+let handleFetchEvents = () => {
+  store.dispatch('fetchEvents')
+    .catch(error => {
+      console.log("EventList Error!", error);
+      router.push({
+        name: 'NotFoundEvent',
+        params: { 
+          resource: "",
+          id: ""
+        }
+      })
+    })
 }
 
+let events = computed(() => store.state.events);
+
 onMounted(() => {
-  handleGetEvents()
+  handleFetchEvents()
 });
 
 </script>

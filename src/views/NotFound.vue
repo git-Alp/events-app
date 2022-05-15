@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h1>404</h1>
-  <h2>Sorry, the {{resource}} is you're looking for is not here.</h2>
+  <h2>404</h2>
+  <h3>Sorry, the page is you're looking for is not here.</h3>
   <router-link class="homepage-router" :to="{name: 'EventList'}">
     Back to the home page
   </router-link>
@@ -9,16 +9,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  resource: {
-    type: String,
-    default: 'page'
-  }
-});
 
 </script>
 
-<style>
+<style scoped>
 .homepage-router {
   color: #42b983;
   font-size: 18px;
